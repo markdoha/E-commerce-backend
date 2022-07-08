@@ -1,10 +1,19 @@
 # E-commerce backend
-`hi this is an E-commerce backend application built with node js express`
+hi this is an E-commerce backend application built with node js express
 
 ## for running the app on local your localhost
 
-- for installing dependencies write ``` npm i ```
-- create a .env to set enviroment vars 
+- for installing dependencies write ` npm i`
 
-### not completed yet
+
+### create enviroment variables
+
+- create a file and name it `.env`
+- add the following variables and change the `##` as you want.
+
+
+```
+BCRYPT=##
+SAULT=##
+```
 
