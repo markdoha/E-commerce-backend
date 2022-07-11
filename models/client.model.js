@@ -12,6 +12,7 @@ let clientSchema = mongoose.Schema({
         enum: ['user', 'admin', 'delivary'],
         default: 'user'
     },
+    premium: { type: Boolean , default: false},
     creditCard: { type: String , require: true},
     creditCardExp: {type: String, require: true},
     creditCardCcv:{type: Number, require: true},
