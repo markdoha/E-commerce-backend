@@ -8,6 +8,10 @@ let productSchema = mongoose.Schema({
     price: { type: Number , require: true},
     discount: { type: String , require: false},
     quantity: { type: Number , require: true},
+    category: {
+        type: String,
+        enum: ["", "clothes", "electronics", "other"],
+    }
 })
 
 let productModel = mongoose.model("product", productSchema)

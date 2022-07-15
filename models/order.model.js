@@ -2,15 +2,29 @@ let mongoose = require("mongoose");
 const { boolean } = require("webidl-conversions");
 
 let orderSchema = mongoose.Schema({
-    cartId:{type: mongoose.Types.ObjectId, ref: "cart"},
-    userId: { type: mongoose.Types.ObjectId , ref: "client"},
-    items: [{ type: mongoose.Types.ObjectId , ref: "product"}],
-    delivaryId: { type: mongoose.Types.ObjectId , ref: "delivary"},
-    paymentType: { type: String , require: true},
-    address: { type: String , require: true},
-    totalPrice: { type: Number , require: true},
-})
+  userId: { type: mongoose.Types.ObjectId, ref: "user" },
+  items: [
+    {
+      product: { type: mongoose.Types.ObjectId, ref: "product" },
+      quantity: Number,
+      total: Number,
+    },
+  ],
+  delivaryId: { type: mongoose.Types.ObjectId, ref: "user" },
+  paymentType: {
+    type: String,
+    require: true,
+    enum: ["cash", "credit", "debit"],
+  },
+  status: {
+    type: String,
+    enum: ["pending", "delivary", "completed", "cancelled"],
+    default: "pending",
+  },
+  address: { type: String, require: true },
+  totalPrice: { type: Number, require: true },
+});
 
-let orderModel = mongoose.model("order", orderSchema)
+let orderModel = mongoose.model("order", orderSchema);
 
 module.exports = orderModel;
