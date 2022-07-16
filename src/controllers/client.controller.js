@@ -1,17 +1,10 @@
-// importing client model
-const client = require("../models/user/model/user.model");
+// importing client repository
 const ClientController = require("../models/user/repo/client");
 
+
+//user controller class
 const clientController = new ClientController();
-// bycrpt
-let bycrpt = require("bcryptjs");
 
-
-//enviroment variables
-let env = require("dotenv").config();
-
-let peaper = process.env.BYCRPT;
-let salt = process.env.SALT;
 
 //function to add User
 let addClientUser = async (req, res) => {
@@ -24,20 +17,7 @@ let addClientUser = async (req, res) => {
 
 //signin function
 let userSignIn = async (req, res) => {
-  try {
-    let user = await client.findOne({ email: req.body.email });
-    if (!user) {
-      res.json({ message: "user not found" });
-    } else {
-      if (bycrpt.compareSync(req.body.password + peaper, user.password)) {
-        res.json({ message: "welcome" + " " + user.role + " " + user.name });
-      } else {
-        res.json({ message: "password is incorrect" });
-      }
-    }
-  } catch (error) {
-    res.json({ message: error });
-  }
+  
 };
 
 module.exports = {
