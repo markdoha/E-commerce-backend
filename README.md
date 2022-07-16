@@ -17,4 +17,3 @@ BCRYPT=##
 SALT=##(number)
 ```
 
-
