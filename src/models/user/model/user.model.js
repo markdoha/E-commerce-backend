@@ -15,7 +15,7 @@ let userSchema = mongoose.Schema({
   premium: { type: Boolean, default: false },
   creditCards: [
     {
-      card: { type: String, require: true },
+      card: { type: String, require: false },
       expDate: String,
       CCV: Number,
     },

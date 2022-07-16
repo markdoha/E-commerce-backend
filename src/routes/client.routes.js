@@ -2,9 +2,9 @@ const app = require("express").Router();
 const clientController = require("../controllers/client.controller");
 
 
-app.get("/allClients", clientController.printALLClients);
+// app.get("/allClients", clientController.printALLClients);
 app.post("/addUser", clientController.addClientUser);
-app.get("/getClientById/:id", clientController.getClientById);
+// app.get("/getClientById/:id", clientController.getClientById);
 app.post("/userSignIn", clientController.userSignIn);
 
 
