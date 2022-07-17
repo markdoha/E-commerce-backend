@@ -37,16 +37,16 @@ module.exports = class ClientController {
   }
 
   //signin function
-  static async SignIn(req, res) {
+  static async SignIn(info) {
     try {
-      let user = await client.findOne({ email: req.body.email });
+      let user = await client.findOne({ email: info.email });
       if (!user) {
         res.json({ message: "user not found" });
       } else {
-        if (bycrpt.compareSync(req.body.password + peaper, user.password)) {
-          res.json({ message: "welcome" + " " + user.role + " " + user.name });
+        if (bycrpt.compareSync(info.password + peaper, user.password)) {
+          return user;
         } else {
-          res.json({ message: "password is incorrect" });
+          return ;
         }
       }
     } catch (error) {
