@@ -37,7 +37,7 @@ module.exports = class ClientController {
   }
 
   //signin function
-  static async SignIn(info) {
+  async SignIn(info) {
     try {
       let user = await client.findOne({ email: info.email });
       if (!user) {
