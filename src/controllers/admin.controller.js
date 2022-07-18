@@ -1,85 +1,44 @@
-// importing client model
-const client = require("../models/client.model");
+// importing admin repository
+const adminController = require("../models/user/repo/admin");
 
-// bycrpt
-let bycrpt = require("bcryptjs");
+//admin controller class
+const adminController = new adminController();
 
-//enviroment variables
-let env = require("dotenv").config();
+//function to add admin
+let addAdmin = async (req, res) => {
+  let admin = adminController.create(req.body);
+  if (!admin) res.status(400).json({ message: "admin not created" });
+  else if (admin == "data not valid")
+    res.status(400).json({ message: "data not valid" });
+  else res.status(200).json({ message: "admin created" });
+};
 
-let peaper = process.env.BYCRPT;
-let salt = process.env.SALT;
-
-//function to get all clients
+//function to print all clients
 let printALLClients = async (req, res) => {
-  try {
-    let clients = await client.find({});
-    res.json(clients);
-  } catch (error) {
-    res.json({ message: error });
-  }
+  let allClients = await adminController.printALLClients();
+  if (!allClients) res.status(400).json({ message: "no clients" });
+  else res.status(200).json({ message: allClients });
 };
 
 //function to get client by id
 let getClientById = async (req, res) => {
-  try {
-    let person = await client
-      .findById({ _id: req.params.id })
-      .select("-password");
-    if (!person) {
-      res.json({ message: "client not found" });
-    } else {
-      res.json(person);
-    }
-  } catch (error) {
-    res.json({ message: error });
-  }
+  let person = await adminController.getClientById(req.params.id);
+  if (!person) res.status(400).json({ message: "client not found" });
+  else res.status(200).json({ message: person });
 };
 
-//function to add Delivary
+//function to add delivary
 let addClientDelivary = async (req, res) => {
-  try {
-    const newDelivary = new client(req.body);
-    if (
-      !newDelivary.name ||
-      !newDelivary.userName ||
-      !newDelivary.email ||
-      !newDelivary.password
-    ) {
-      res.json({ success: "False // ENTER VALID DATA PLZZZZZZZ" });
-    } else {
-      newDelivary.password = bycrpt.hashSync(
-        newDelivary.password,
-        peaper,
-        sault
-      );
-      newDelivary.role = "delivary";
-      await newDelivary.save();
-      res.status(201).json({ success: "true" });
-    }
-  } catch (error) {
-    res.json({ message: error });
-  }
+  let delivary = await adminController.addClientDelivary(req.body);
+  if (!delivary) res.status(400).json({ message: "delivary not added" });
+  else if (delivary == "data not valid")
+    res.status(400).json({ message: "data not valid" });
+  else res.status(200).json({ message: "delivary added" });
 };
 
-//function to add Admin
-let addClientAdmin = async (req, res) => {
-  try {
-    const newAdmin = new client(req.body);
-    if (
-      !newAdmin.name ||
-      !newAdmin.userName ||
-      !newAdmin.email ||
-      !newAdmin.password
-    ) {
-      res.json({ success: "False // ENTER VALID DATA PLZZZZZZZ" });
-    } else {
-      newAdmin.password = bycrpt.hashSync(newAdmin.password, peaper, sault);
-      newAdmin.role = "admin";
-      await newAdmin.save();
-      res.status(201).json({ success: "true" });
-    }
-  } catch (error) {
-    res.json({ message: error });
-  }
+module.exports = {
+  addAdmin,
+  printALLClients,
+  getClientById,
+  addClientDelivary,
 };

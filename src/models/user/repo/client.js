@@ -11,10 +11,8 @@ let env = require("dotenv").config();
 let peaper = process.env.BYCRPT;
 let salt = process.env.SALT;
 
-
-
 module.exports = class ClientController {
-    //function to add User
+  //function to add User
   async create(user) {
     try {
       const newUser = new client(user);
@@ -46,15 +44,11 @@ module.exports = class ClientController {
         if (bycrpt.compareSync(info.password + peaper, user.password)) {
           return user;
         } else {
-          return ;
+          return;
         }
       }
     } catch (error) {
       res.json({ message: error });
     }
   }
-
-}
-
-
-
+};
