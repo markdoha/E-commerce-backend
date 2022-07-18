@@ -1,5 +1,5 @@
 // importing client model
-const client = require("../models/client.model");
+const client = require("../model/user.model");
 
 // bycrpt
 let bycrpt = require("bcryptjs");

@@ -1,8 +1,8 @@
 // importing admin repository
-const adminController = require("../models/user/repo/admin");
+const AdminController = require("../models/user/repo/admin");
 
 //admin controller class
-const adminController = new adminController();
+const adminController = new AdminController();
 
 //function to add admin
 let addAdmin = async (req, res) => {

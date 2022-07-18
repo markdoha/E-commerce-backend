@@ -4,8 +4,8 @@ const express = require('express')
 const connection = require("./db.connection")
 
 //importing routes
-const clientRoutes = require("./routes/client.routes")
-const adminRoutes = require("./routes/admin.routes")
+const clientRoutes = require("./routes/user.routes/client.routes")
+const adminRoutes = require("./routes/user.routes/admin.routes")
 
 //app
 const app = express();
