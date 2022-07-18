@@ -1,5 +1,5 @@
 # E-commerce backend (in progress)
-hi this is an E-commerce backend application built with node js ( Typescript soon )express 
+hi this is an E-commerce backend application built with node js express 
 
 ## for running the app on local your localhost
 
