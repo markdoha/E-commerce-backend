@@ -22,7 +22,7 @@ module.exports = class ClientController {
         !newUser.email ||
         !newUser.password
       ) {
-        return;
+        return "data not valid";
       } else {
         newUser.password = bycrpt.hashSync(newUser.password + peaper, salt);
         await newUser.save();
