@@ -1,5 +1,5 @@
 // importing client model
-const client = require("../model/user.model");
+const client = require("./user.model");
 
 // bycrpt
 let bycrpt = require("bcryptjs");
@@ -14,8 +14,19 @@ module.exports = class adminController {
   //function to get all clients
   async printALLClients() {
     try {
-      let clients = await client.find({});
+      let clients = await client.find({role: "client"});
       return clients;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  }
+
+  //function to get all admins
+  async printAllAdmin() {
+    try {
+      let admins = await client.find({ role: "admin" });
+      return admins;
     } catch (error) {
       console.log(error);
       return;
@@ -76,7 +87,7 @@ module.exports = class adminController {
       ) {
         return "data not valid";
       } else {
-        newAdmin.password = bycrpt.hashSync(newAdmin.password, peaper, sault);
+        newAdmin.password = bycrpt.hashSync(newAdmin.password, peaper, salt);
         newAdmin.role = "admin";
         await newAdmin.save();
         return newAdmin;

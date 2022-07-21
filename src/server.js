@@ -12,6 +12,7 @@ const app = express();
 connection();
 
 app.use(express.json());
+
 app.use("/client", clientRoutes);
 app.use("/admin", adminRoutes);
 

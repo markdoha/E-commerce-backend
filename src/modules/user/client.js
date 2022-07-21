@@ -1,5 +1,5 @@
 // importing client model
-const client = require("../model/user.model");
+const client = require("./user.model");
 
 // bycrpt
 let bycrpt = require("bcryptjs");
@@ -24,7 +24,7 @@ module.exports = class ClientController {
       ) {
         return "data not valid";
       } else {
-        newUser.password = bycrpt.hashSync(newUser.password + peaper, salt);
+        newUser.password = bycrpt.hashSync(newUser.password + peaper, 3);
         await newUser.save();
         return newUser;
       }
