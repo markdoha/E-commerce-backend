@@ -30,7 +30,7 @@ module.exports = class ClientController {
       }
     } catch (error) {
       console.log(error);
-      res.json({ message: error });
+      return;
     }
   }
 
@@ -48,7 +48,8 @@ module.exports = class ClientController {
         }
       }
     } catch (error) {
-      res.json({ message: error });
+      console.log(error);
+      return;
     }
   }
 };
