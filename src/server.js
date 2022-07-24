@@ -4,8 +4,7 @@ const express = require('express')
 const connection = require("./db.connection")
 
 //importing routes
-const clientRoutes = require("./routes/user.routes/client.routes")
-const adminRoutes = require("./routes/user.routes/admin.routes")
+const routes = require("./routes/index.routes")
 
 //app
 const app = express();
@@ -13,8 +12,7 @@ connection();
 
 app.use(express.json());
 
-app.use("/client", clientRoutes);
-app.use("/admin", adminRoutes);
+app.use("/", routes);
 
 
 app.listen(3000,console.log("server is running"))
