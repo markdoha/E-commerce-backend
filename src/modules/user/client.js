@@ -35,21 +35,5 @@ module.exports = class ClientController {
   }
 
   //signin function
-  async SignIn(info) {
-    try {
-      let user = await client.findOne({ email: info.email });
-      if (!user) {
-        res.json({ message: "user not found" });
-      } else {
-        if (bycrpt.compareSync(info.password + peaper, user.password)) {
-          return user;
-        } else {
-          return;
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  }
+ 
 };
