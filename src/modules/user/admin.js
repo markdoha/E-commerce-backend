@@ -12,21 +12,18 @@ let salt = process.env.SALT;
 
 module.exports = class adminController {
   //function to get all clients
-  async printALLClients() {
+  async Read(type, id="nothing") {
     try {
-      let clients = await client.find({role: "client"});
+      if(id!="nothing"){
+        let person = await client.findById({ _id: id }).select("-password");
+        if (!person) {
+          return;
+        } else {
+          return person;
+        }
+      }
+      let clients = await client.find({role: type});
       return clients;
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  }
-
-  //function to get all admins
-  async printAllAdmin() {
-    try {
-      let admins = await client.find({ role: "admin" });
-      return admins;
     } catch (error) {
       console.log(error);
       return;

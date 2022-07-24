@@ -21,22 +21,29 @@ let addAdmin = async (req, res) => {
 
 //function to print all admins
 let printAdmins = async (req, res) => {
-  let admins = await adminController.printAllAdmin();
+  let admins = await adminController.Read("admin");
   if (!admins) res.status(400).json({ message: "no admins" });
   else res.status(200).json({ message: "all admins", admins: admins });
 }
 
 //function to print all clients
 let printALLClients = async (req, res) => {
-  let allClients = await adminController.printALLClients();
+  let allClients = await adminController.Read("client");
   if (!allClients) res.status(400).json({ message: "no clients" });
   else res.status(200).json({ message: allClients });
 };
 
 //function to get client by id
 let getClientById = async (req, res) => {
-  let person = await adminController.getClientById(req.params.id);
+  let person = await adminController.Read("client", req.params.id);
   if (!person) res.status(400).json({ message: "client not found" });
+  else res.status(200).json({ message: person });
+};
+
+//function to get client by id
+let getadminById = async (req, res) => {
+  let person = await adminController.Read("admin", req.params.id);
+  if (!person) res.status(400).json({ message: "admin not found" });
   else res.status(200).json({ message: person });
 };
 
@@ -55,4 +62,5 @@ module.exports = {
   getClientById,
   addClientDelivary,
   printAdmins,
+  getadminById
 };
