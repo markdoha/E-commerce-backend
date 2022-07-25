@@ -1,14 +1,14 @@
 // importing client repository
-const ClientController = require("../modules/user/client");
+const userController = require("../modules/user/repo");
 
 // jwt
  const jwt = require("jsonwebtoken");
 //user controller class
-const clientController = new ClientController();
+const clientController = new userController();
 
 //function to add User
 let addClientUser = async (req, res) => {
-  let user = clientController.create(req.body);
+  let user = clientController.create("client",req.body);
   if (!user) res.status(400).json({ message: "user not created" });
   else if (user == "data not valid")
     res.status(400).json({ message: "data not valid" });
@@ -20,7 +20,7 @@ let addClientUser = async (req, res) => {
   //signin function
   let userSignIn = async (req, res) => {
     let info = req.body;
-    let user = await clientController.SignIn(info);
+    let user = await clientController.signIn(info);
     if (!user) res.status(400).json({ message: "user not found" });
     else{
     let token = jwt.sign({ user: user }, process.env.SECRET);

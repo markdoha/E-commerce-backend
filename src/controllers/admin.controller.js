@@ -1,5 +1,5 @@
 // importing admin repository
-const userController = require("../modules/user/user");
+const userController = require("../modules/user/repo");
 
 //admin controller class
 const User = new userController();
