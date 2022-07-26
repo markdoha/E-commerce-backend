@@ -1,5 +1,5 @@
 const app = require("express").Router();
-const clientController = require("../../controllers/user.controller");
+const clientController = require("../../controllers//user/user.controller");
 
 app.post("/addUser", clientController.addClientUser);
 

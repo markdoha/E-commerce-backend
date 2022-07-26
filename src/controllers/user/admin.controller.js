@@ -1,5 +1,5 @@
 // importing admin repository
-const userController = require("../modules/user/repo");
+const userController = require("../../modules/user/repo");
 
 //admin controller class
 const User = new userController();
@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 
 //function to add admin
 let addAdmin = async (req, res) => {
-  let admin = User.create("admin",req.body);
+  let admin = User.create("admin", req.body);
   if (!admin) res.status(400).json({ message: "admin not created" });
   else if (admin == "data not valid")
     res.status(400).json({ message: "data not valid" });
@@ -24,7 +24,7 @@ let printAdmins = async (req, res) => {
   let admins = await User.Read("admin");
   if (!admins) res.status(400).json({ message: "no admins" });
   else res.status(200).json({ message: "all admins", admins: admins });
-}
+};
 
 //function to print all clients
 let printALLClients = async (req, res) => {
@@ -49,7 +49,7 @@ let getadminById = async (req, res) => {
 
 //function to add delivary
 let addClientDelivary = async (req, res) => {
-  let delivary = await User.create("delivary",req.body);
+  let delivary = await User.create("delivary", req.body);
   if (!delivary) res.status(400).json({ message: "delivary not added" });
   else if (delivary == "data not valid")
     res.status(400).json({ message: "data not valid" });
@@ -61,8 +61,7 @@ let getAllDelivary = async (req, res) => {
   let delivary = await User.Read("delivary");
   if (!delivary) res.status(400).json({ message: "no delivaries" });
   else res.status(200).json({ message: delivary });
-}
-
+};
 
 module.exports = {
   addAdmin,

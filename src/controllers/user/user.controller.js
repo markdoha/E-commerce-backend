@@ -1,5 +1,5 @@
 // importing client repository
-const userController = require("../modules/user/repo");
+const userController = require("../../modules/user/repo");
 
 // jwt
  const jwt = require("jsonwebtoken");
