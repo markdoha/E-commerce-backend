@@ -15,5 +15,6 @@ hi this is an E-commerce backend application built with node js express.
 ```
 BCRYPT=##
 SALT=##(number)
+SECRET=##
 ```
 
