@@ -1,15 +1,6 @@
 // importing client model
 const product = require("./product.model");
 
-// bycrpt
-let bycrpt = require("bcryptjs");
-
-//enviroment variables
-let env = require("dotenv").config();
-
-let peaper = process.env.BYCRPT;
-let salt = process.env.SALT;
-
 module.exports = class productController {
   async create(info) {
     try {
