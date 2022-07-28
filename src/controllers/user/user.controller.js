@@ -30,7 +30,15 @@ let addClientUser = async (req, res) => {
     }
 };
 
+ //function to update user
+let updateClient = async (req, res) => {
+  let user = await clientController.update(req.params.id, req.body);
+  if (!user) res.status(400).json({ message: "user not updated" });
+  else res.status(200).json({ message: "user updated" });
+}
+
 module.exports = {
   addClientUser,
   userSignIn,
+  updateClient
 };

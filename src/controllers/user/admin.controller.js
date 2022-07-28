@@ -63,6 +63,12 @@ let getAllDelivary = async (req, res) => {
   else res.status(200).json({ message: delivary });
 };
 
+let updateAdmin = async (req, res) => {
+  let admin = await User.update(req.params.id, req.body);
+  if (!admin) res.status(400).json({ message: "admin not updated" });
+  else res.status(200).json({ message: "admin updated" });
+}
+
 module.exports = {
   addAdmin,
   printALLClients,
@@ -71,4 +77,5 @@ module.exports = {
   printAdmins,
   getadminById,
   getAllDelivary,
+  updateAdmin
 };

@@ -12,7 +12,7 @@ let salt = process.env.SALT;
 
 module.exports = class userController {
   //function to get all clients
-  async Read(type= "nothing", id = "nothing") {
+  async Read(type = "nothing", id = "nothing") {
     try {
       if (id != "nothing" && type == "nothing") {
         let person = await client.findById({ _id: id }).select("-password");
@@ -21,20 +21,17 @@ module.exports = class userController {
         } else {
           return person;
         }
-      }
-      else if(type != "nothing" && id == "nothing"){
-      let clients = await client.find({ role: type });
-      return clients;
-      }
-      else if(type != "nothing" && id != "nothing"){
+      } else if (type != "nothing" && id == "nothing") {
+        let clients = await client.find({ role: type });
+        return clients;
+      } else if (type != "nothing" && id != "nothing") {
         let person = await client.findById({ _id: id }).select("-password");
         if (!person) {
           return;
         } else {
           return person;
         }
-      }
-      else{
+      } else {
         let clients = await client.find();
         return clients;
       }

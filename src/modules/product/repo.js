@@ -40,4 +40,48 @@ module.exports = class productController {
       return;
     }
   }
+
+  async read(id = null) {
+    try {
+      if (id) {
+        const product = await product.findById(id);
+        return product;
+      } else {
+        const product = await product.find();
+        return product;
+      }
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  }
+
+  async update(id, info) {
+    try {
+      if (
+        !info.productName ||
+        !info.price ||
+        !info.quantity ||
+        !info.productDescription ||
+        !info.category
+      )
+        return "data not valid";
+
+      const product = await product.findByIdAndUpdate(id, info);
+      return product;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  }
+
+  async delete(id) {
+    try {
+      const product = await product.findByIdAndDelete(id);
+      return product;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  }
 };
