@@ -1,8 +1,8 @@
 // importing coupon model
-const coupon = require("./copouns.model");
+const coupon = require("./model");
 
-module.exports = class couponController {
-    async create(info) {
+
+    let create = async (info) => {
         try {
             const newCoupon = new coupon(info);
             if(!newCoupon.value || !newCoupon.code || !newCoupon.quantity){
@@ -18,7 +18,7 @@ module.exports = class couponController {
         }
     }
 
-    async read(id = null) {
+    let read = async (id = null) => {
         try {
             if (id) {
                 const coupon = await coupon.findById(id);
@@ -33,7 +33,7 @@ module.exports = class couponController {
         }
     }
 
-    async update(id, info) {
+    let update =  async (id, info) => {
         try {
             if(!info.value || !info.code || !info.quantity){
                 return "data not valid";
@@ -48,7 +48,7 @@ module.exports = class couponController {
         }
     }
 
-    async delete(id) {
+   let del = async (id) => {
         try {
             const coupon = await coupon.findByIdAndRemove(id);
             return coupon;
@@ -57,4 +57,10 @@ module.exports = class couponController {
             return;
         }
     }
-};
+
+    module.exports = {
+        create,
+        read,
+        update,
+        del
+    }
