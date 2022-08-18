@@ -98,7 +98,7 @@ let create = async (type, user) => {
     }
   } catch (error) {
     console.log(error);
-    return;
+    return { success: false, code: 500, error: "Server error" };
   }
 };
 
@@ -114,11 +114,11 @@ let update = async (id, user) => {
       person.email = user.email;
       person.password = bycrpt.hashSync(user.password, peaper, salt);
       await person.save();
-      return person;
+      return { success: true, record: person, code: 200 };
     }
   } catch (error) {
     console.log(error);
-    return;
+    return { success: false, code: 500, error: "Server error" };
   }
 };
 
@@ -130,11 +130,11 @@ let del = async (id) => {
       return;
     } else {
       await person.remove();
-      return person;
+      return { success: true, code: 200, record: person };
     }
   } catch (error) {
     console.log(error);
-    return;
+    return { success: false, code: 500, error: "Server error" };
   }
 };
 
@@ -143,17 +143,17 @@ let signIn = async (info) => {
   try {
     let user = await client.findOne({ email: info.email });
     if (!user) {
-      res.json({ message: "user not found" });
+      return { success: false, code: 404, record: "User not found" };
     } else {
       if (bycrpt.compareSync(info.password + peaper, user.password)) {
-        return user;
+        return { success: true, record: user, code: 200 };
       } else {
-        return;
+        return { success: false, code: 400, error: "somthing wrong happend" };
       }
     }
   } catch (error) {
     console.log(error);
-    return;
+    return { success: false, code: 500, error: "Server error" };
   }
 };
 

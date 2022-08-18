@@ -1,5 +1,5 @@
 // importing client model
-const product = require("./product.model");
+const product = require("./model");
 
 module.exports = class productController {
   async create(info) {

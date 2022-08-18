@@ -6,51 +6,40 @@ const jwt = require("jsonwebtoken");
 
 //function to add admin
 let addAdmin = async (req, res) => {
-  let admin = userController.create("admin", req.body);
-  if (!admin) res.status(400).json({ message: "admin not created" });
-  else if (admin == "data not valid")
-    res.status(400).json({ message: "data not valid" });
+  const admin = await userController.create("admin", req.body);
+  if (admin.code != 200) res.status(admin.code).json({records: admin});
   else {
-    let token = jwt.sign({ user: admin }, process.env.SECRET);
-    res.status(200).json({ message: "admin created", token: token });
+    let token = jwt.sign({ user: admin.record }, process.env.SECRET);
+    res.status(admin.code).json({ records: admin , token: token });
   }
 };
 
 //function to print all admins
 let printAdmins = async (req, res) => {
-  let admins = await userController.Read("admin");
-  if (!admins) res.status(400).json({ message: "no admins" });
-  else res.status(200).json({ message: "all admins", admins: admins });
+  const admins = await userController.getAll("admin");
+  if (admins.code != 200) res.status(admins.code).json({records: admins});
+  else res.status(admins.code).json({ records: admins });
 };
 
 //function to print all clients
 let printALLClients = async (req, res) => {
-  let allClients = await userController.Read("client");
-  if (!allClients) res.status(400).json({ message: "no clients" });
-  else res.status(200).json({ message: allClients });
+  const allClients = await userController.Read("client");
+  if (allClients.code != 200) res.status(allClients.code).json({ record: allClients });
+  else res.status(200).json({ records: allClients });
 };
 
 //function to get client by id
 let getClientById = async (req, res) => {
-  let person = await userController.Read("client", req.params.id);
-  if (!person) res.status(400).json({ message: "client not found" });
-  else res.status(200).json({ records: person });
-};
-
-//function to get client by id
-let getadminById = async (req, res) => {
-  let person = await userController.Read("admin", req.params.id);
-  if (!person) res.status(400).json({ message: "admin not found" });
+  const person = await userController.isExist(req.params.id);
+  if (person != 200) res.status(person.code).json({ records: person });
   else res.status(200).json({ records: person });
 };
 
 //function to add delivary
 let addClientDelivary = async (req, res) => {
-  let delivary = await userController.create("delivary", req.body);
-  if (!delivary) res.status(400).json({ message: "delivary not added" });
-  else if (delivary == "data not valid")
-    res.status(400).json({ message: "data not valid" });
-  else res.status(200).json({ message: "delivary added" });
+  const delivary = await userController.create("delivary", req.body);
+  if (delivary != delivary.code) res.status(delivary.code).json({ record: delivary });
+  else res.status(200).json({ record: delivary });
 };
 
 // get all delivary
@@ -62,9 +51,9 @@ let getAllDelivary = async (req, res) => {
 
 // update admin
 let updateAdmin = async (req, res) => {
-  let admin = await userController.update(req.params.id, req.body);
-  if (!admin) res.status(400).json({ message: "admin not updated" });
-  else res.status(200).json({ message: "admin updated" });
+  const admin = await userController.update(req.params.id, req.body);
+  if (admin != 200) res.status(admin.code).json({ record: admin });
+  else res.status(200).json({ record: admin });
 }
 
 module.exports = {
@@ -73,7 +62,6 @@ module.exports = {
   getClientById,
   addClientDelivary,
   printAdmins,
-  getadminById,
   getAllDelivary,
   updateAdmin
 };

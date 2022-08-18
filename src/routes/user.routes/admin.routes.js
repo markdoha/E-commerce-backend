@@ -11,6 +11,6 @@ app.get("delivary", adminController.getAllDelivary); //(missing config for the a
 app.post("/admin", adminController.addAdmin); //(missing config for the admin)
 app.get("/admin", adminController.updateAdmin); //(missing config for the admin)
 app.get("/admin", adminController.printAdmins); //(missing config for the admin)
-app.get("/admin/:id", adminController.getadminById); //(missing config for the admin)
+app.get("/admin/:id", adminController.getClientById); //(missing config for the admin)
 
 module.exports = app;
