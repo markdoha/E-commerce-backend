@@ -1,5 +1,5 @@
 const app = require("express").Router();
-const couponController = require("../../controllers/coupon/coupon.controller");
+const couponController = require("../../../controllers/coupon/coupon.controller");
 
 app.post("/coupon", couponController.addCoupon);
 app.get("/coupon", couponController.getAllCoupons);
