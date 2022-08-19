@@ -5,31 +5,48 @@ let create = async (info) => {
   try {
     const newCoupon = new coupon(info);
     if (!newCoupon.value || !newCoupon.code || !newCoupon.quantity) {
-      return "data not valid";
+      return { success: false, code: 400, error: "data not valid" };
     } else {
       const coupon = await newCoupon.save();
-      return coupon;
+      return { success: true, record: coupon, code: 200 };
     }
   } catch (error) {
     console.log(error);
-    return;
+    return { success: false, code: 500, error: "server error" };
   }
 };
 
-let read = async (id = null) => {
+let isExist = async (value) => {  
   try {
-    if (id) {
-      const coupon = await coupon.findById(id);
-      return coupon;
+    const fcoupon = await coupon.findOne({ _id: value }).select("-password");
+    if (fcoupon) {
+      return {
+        success: true,
+        record: fcoupon,
+        code: 200,
+      };
     } else {
-      const coupon = await coupon.find();
-      return coupon;
+      return { success: false, code: 404, error: "coupon not found" };
     }
   } catch (error) {
     console.log(error);
-    return;
+    return { success: false, code: 500, error: "server error" };
   }
-};
+}
+
+let getAll = async () => {
+  try {
+    const coupons = await coupon.find();
+    if (coupons) {
+      return { success: true, record: coupons, code: 200 };
+    } else {
+      return { success: false, code: 404, error: " no coupons found" };
+    }
+  } catch (error) {
+    console.log(error);
+    return { success: false, code: 500, error: "server error" };
+  }
+}
 
 let update = async (id, info) => {
   try {
@@ -57,7 +74,8 @@ let del = async (id) => {
 
 module.exports = {
   create,
-  read,
+  isExist,
+  getAll,
   update,
   del,
 };
