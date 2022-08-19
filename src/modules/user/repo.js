@@ -48,53 +48,33 @@ let create = async (type, user) => {
   try {
     if (type == "admin") {
       const newAdmin = new client(user);
-      if (
-        !newAdmin.name ||
-        !newAdmin.userName ||
-        !newAdmin.email ||
-        !newAdmin.password
-      ) {
-        return { success: false, code: 400, error: "missing fields" };
-      } else {
-        newAdmin.password = bycrpt.hashSync(newAdmin.password, peaper, salt);
-        newAdmin.role = "admin";
-        await newAdmin.save();
-        return { success: true, code: 200, record: newAdmin };
-      }
+
+      newAdmin.password = bycrpt.hashSync(newAdmin.password, peaper, salt);
+      newAdmin.role = "admin";
+      await newAdmin.save();
+      return { success: true, code: 200, record: newAdmin };
+
+
     } else if (type == "delivary") {
       const newDelivary = new client(user);
-      if (
-        !newDelivary.name ||
-        !newDelivary.userName ||
-        !newDelivary.email ||
-        !newDelivary.password
-      ) {
-        return { success: false, code: 400, error: "missing fields" };
-      } else {
-        newDelivary.password = bycrpt.hashSync(
-          newDelivary.password,
-          peaper,
-          salt
-        );
-        newDelivary.role = "delivary";
-        await newDelivary.save();
-        return { success: true, record: newDelivary, code: 200 };
-      }
+      newDelivary.password = bycrpt.hashSync(
+        newDelivary.password,
+        peaper,
+        salt
+      );
+      newDelivary.role = "delivary";
+      await newDelivary.save();
+      return { success: true, record: newDelivary, code: 200 };
+
+
     } else if (type == "client") {
       const newClient = new client(user);
-      if (
-        !newClient.name ||
-        !newClient.userName ||
-        !newClient.email ||
-        !newClient.password
-      ) {
-        return { success: false, code: 400, error: "missing fields" };
-      } else {
-        newClient.password = bycrpt.hashSync(newClient.password, peaper, salt);
-        newClient.role = "client";
-        await newClient.save();
-        return { success: true, record: newClient, code: 200 };
-      }
+      newClient.password = bycrpt.hashSync(newClient.password, peaper, salt);
+      newClient.role = "client";
+      await newClient.save();
+      return { success: true, record: newClient, code: 200 };
+
+      
     }
   } catch (error) {
     console.log(error);
