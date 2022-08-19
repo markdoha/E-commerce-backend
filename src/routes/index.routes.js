@@ -5,10 +5,10 @@ const clientRoutes = require("./user.routes/client.index");
 
 
 // client routes
-app.use("api/v1/", clientRoutes);
+app.use("/api/v1/", clientRoutes);
 
 // admin routes
-app.use("api/v1/", adminRoutes)
+app.use("/api/v1/", adminRoutes)
 
 
 module.exports = app;

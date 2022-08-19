@@ -12,7 +12,7 @@ connection();
 
 app.use(express.json());
 
-app.use("/", routes);
+app.use("", routes);
 
 
 app.listen(3000,console.log("server is running"));
