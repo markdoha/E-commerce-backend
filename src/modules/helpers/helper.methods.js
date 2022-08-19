@@ -1,5 +1,5 @@
-exports.isExist = async (value) => 
-{ const user = await User.findOne({ _id: value}).select("-password")
+exports.isExist = async (value, doc) => 
+{ const user = await doc.findOne({ _id: value}).select("-password")
  if(user) {
      return {
          success: true, record: user, code: 200 
